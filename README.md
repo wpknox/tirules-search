@@ -1,6 +1,8 @@
 # TI4 Rules Reference
 
-A web reference for the rules of *Twilight Imperium: Fourth Edition*, including the *Prophecy of Kings* expansion and Codices I–IV.
+**Live site: [wpknox.github.io/tirules-search](https://wpknox.github.io/tirules-search/)**
+
+A web reference for the rules of *Twilight Imperium: Fourth Edition*, including the *Prophecy of Kings* and *Thunders Edge* expansions.
 
 ## Credit
 
