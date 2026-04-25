@@ -1,13 +1,10 @@
-<?php ob_start(); ?>
 <!DOCTYPE html>
 <html>
 <head>
 <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
 <meta content="utf-8" http-equiv="encoding"/>
-<meta name="author" content="BradleyΣ"/>
-<meta name="version" content="v0.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<link rel="canonical" href="https://tirules2.com<?php echo htmlspecialchars(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)); ?>"/>
+<title>Opponent - Twilight Imperium Rules</title>
 <link rel="icon" href="favicon.png"/>
 <link rel="stylesheet" type="text/css" href="style.css"/>
 <script>
@@ -46,26 +43,39 @@
 </head>
 <body>
 <nav class="search-bar">
-<form action="/search" method="get">
-<input type="search" name="q" placeholder="Search rules&hellip;" value="<?php echo htmlspecialchars($_GET['q'] ?? ''); ?>">
+<form action="search.html">
+<input type="search" name="q" placeholder="Search rules&hellip;" id="search-input">
 <button type="submit">Search</button>
 </form>
 </nav>
-<?php
-$content = ob_get_clean();
-ob_start();
-register_shutdown_function(function() use ($content) {
-    $page_content = ob_get_clean();
-    
-    // Extract the header text
-    $page_title = 'Twilight Imperium Rule Help';
-    if (preg_match('/<header>(.*?)<\/header>/i', $page_content, $matches)) {
-        $page_title = strip_tags($matches[1]) . ' - Twilight Imperium Rules';
-    }
-    
-    // Output the complete page with dynamic title
-    echo $content;
-    echo '<title>' . htmlspecialchars($page_title) . '</title>';
-    echo $page_content;
-});
-?>
+<header><h1>Opponent</h1></header>
+<article>
+<h2>Rules Reference</h2>
+<style> .lrr > li:before, .lrr > h2 > li:before {content: '62.' counter(item, decimal);} </style>
+<p>During combat, a player&rsquo;s opponent is the other player that either has ships in the system at the start of the space combat or has ground forces on the planet at the start of a ground combat.</p>
+    <ol class="lrr">
+    <li>Players who do not have units on either side of a combat are not opponents. Those players cannot use abilities or have abilities used against them that are used against an opponent.</li>
+    </ol>
+
+<h2>Notes</h2>
+    <ol class="note">
+    </ol>
+
+<h2>Related Topics</h2>
+    <ul>
+    <li><a href="R_attacker.html">Attacker</a></li>
+    <li><a href="R_defender.html">Defender</a></li>
+    <li><a href="R_ground_combat.html">Ground Combat</a></li>
+    <li><a href="R_space_combat.html">Space Combat</a></li>
+    </ul>
+</article>
+<footer>
+<p><a href="index.html" style="font-size:2em;">Home</a></p>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>Static mirror for offline use. All content and credit belong to
+<a href="https://github.com/dangothemango/tirules">dangothemango on GitHub</a>
+&mdash; original site at <a href="https://tirules2.com">tirules2.com</a>.</p>
+<p><span style="background-color: #fffacd; padding: 0.25em 0.5em; box-shadow: inset 4px 0 0 0 #ffa500; color: black;">Content highlighted in this color</span> reflects official rulings from Dane and are not part of the Living Rules Reference.</p>
+</footer>
+</body>
+</html>

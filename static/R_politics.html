@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="utf-8" http-equiv="encoding"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Politics (Strategy Card) - Twilight Imperium Rules</title>
+<link rel="icon" href="favicon.png"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script>
+(function () {
+    var hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    window.addEventListener('DOMContentLoaded', function () {
+        var article = document.querySelector('article');
+        if (!article) return;
+        var re = new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null, false);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        var first = null;
+        nodes.forEach(function (node) {
+            if (!node.nodeValue.trim()) return;
+            var m, last = 0, frag = document.createDocumentFragment();
+            re.lastIndex = 0;
+            while ((m = re.exec(node.nodeValue)) !== null) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+                var mark = document.createElement('mark');
+                mark.textContent = m[0];
+                if (!first) first = mark;
+                frag.appendChild(mark);
+                last = m.index + m[0].length;
+            }
+            if (last > 0) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            }
+        });
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+</head>
+<body>
+<nav class="search-bar">
+<form action="search.html">
+<input type="search" name="q" placeholder="Search rules&hellip;" id="search-input">
+<button type="submit">Search</button>
+</form>
+</nav>
+<header><h1>Politics <sub>(Strategy Card)</sub></h1></header>
+<article>
+<h2>Rules Reference</h2>
+<style> .lrr > li:before, .lrr > h2 > li:before {content: '66.' counter(item, decimal);} </style>
+<p>The <i>Politics</i> strategy card allows players to draw action cards. Additionally, the active player chooses a new speaker and looks at cards in the agenda deck. This card&rsquo;s initiative value is &ldquo;3&rdquo;.</p>
+    <ol class="lrr">
+    <li>During the action phase, if the active player has the <i>Politics</i> strategy card, they can perform a strategic action to resolve that card&rsquo;s primary ability.</li>
+    <li>To resolve the primary ability on the <i>Politics</i> strategy card, the active player resolves the following effects in order:</li>
+    <ol class="roman">
+        <li>The active player chooses any player that does not have the speaker token. The active player may choose themselves as long as they do not have the speaker token. The chosen player places the speaker token in their play area; they are now the speaker.</li>
+        <li>The active player draws two action cards.</li>
+        <li>The active player secretly looks at the top two cards of the agenda deck. Then, that player places each card on either the top or the bottom of the deck. If they place both cards on either the top or bottom, they can place them in any order.</li>
+    </ol>
+    <li>After the active player resolves the primary ability of the <i>Politics</i> strategy card, each other player, beginning with the player to the left of the active player and proceeding clockwise, may spend one command token from their strategy pool to draw two action cards.</li>
+    </ol>
+
+<h2>Notes</h2>
+    <ol class="note">
+    <li>If there are few cards remaining in the action card deck, they will be dealt out in clockwise order from the active player. After those players have discarded down to their seven card hand limit, if necessary, the discard pile will be shuffled to form a new deck. The remaining players (including the player who received the last action card from the previous deck, if applicable) will then be dealt their action cards.</li>
+    <li>When resolving the primary ability of the <i>Politics</i> card, the active player cannot show the agenda cards they drew to any other player.</li>
+    </ol>
+
+<h2>Related Topics</h2>
+    <ul>
+    <li><a href="R_action_cards.html">Action Cards</a></li>
+    <li><a href="R_agenda_card.html">Agenda Card</a></li>
+    <li><a href="R_initiative_order.html">Initiative Order</a></li>
+    <li><a href="R_speaker.html">Speaker</a></li>
+    <li><a href="R_strategic_action.html">Strategic Action</a></li>
+    <li><a href="R_strategy_card.html">Strategy Card</a></li>
+    </ul>
+</article>
+<footer>
+<p><a href="index.html" style="font-size:2em;">Home</a></p>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>Static mirror for offline use. All content and credit belong to
+<a href="https://github.com/dangothemango/tirules">dangothemango on GitHub</a>
+&mdash; original site at <a href="https://tirules2.com">tirules2.com</a>.</p>
+<p><span style="background-color: #fffacd; padding: 0.25em 0.5em; box-shadow: inset 4px 0 0 0 #ffa500; color: black;">Content highlighted in this color</span> reflects official rulings from Dane and are not part of the Living Rules Reference.</p>
+</footer>
+</body>
+</html>

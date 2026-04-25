@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="utf-8" http-equiv="encoding"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Planetary Shield (Unit Ability) - Twilight Imperium Rules</title>
+<link rel="icon" href="favicon.png"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script>
+(function () {
+    var hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    window.addEventListener('DOMContentLoaded', function () {
+        var article = document.querySelector('article');
+        if (!article) return;
+        var re = new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null, false);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        var first = null;
+        nodes.forEach(function (node) {
+            if (!node.nodeValue.trim()) return;
+            var m, last = 0, frag = document.createDocumentFragment();
+            re.lastIndex = 0;
+            while ((m = re.exec(node.nodeValue)) !== null) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+                var mark = document.createElement('mark');
+                mark.textContent = m[0];
+                if (!first) first = mark;
+                frag.appendChild(mark);
+                last = m.index + m[0].length;
+            }
+            if (last > 0) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            }
+        });
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+</head>
+<body>
+<nav class="search-bar">
+<form action="search.html">
+<input type="search" name="q" placeholder="Search rules&hellip;" id="search-input">
+<button type="submit">Search</button>
+</form>
+</nav>
+<header><h1>Planetary Shield <sub>(Unit Ability)</sub></h1></header>
+<article>
+<h2>Rules Reference</h2>
+<style> .lrr > li:before, .lrr > h2 > li:before {content: '65.' counter(item, decimal);} </style>
+<p>Units cannot use the <sc>Bombardment</sc> ability against a planet that contains a unit that has the <sc>Planetary Shield</sc> ability.</p>
+    <ol class="lrr">
+    <li>The <sc>Planetary Shield</sc> ability does not prevent a planet from being affected by the <i>X&ndash;89 Bacterial Weapon</i> technology.</li>
+    <li>The <sc>Planetary Shield</sc> ability prevents an L1Z1X player from using their <sc>Harrow</sc> faction ability.</li>
+    <li>If a war sun is in a system with any number of other players&rsquo; units that have the <sc>Planetary Shield</sc> ability, those units are treated as if they do not have that ability.</li>
+    <ol>
+        <li>Units treated as if they do not have a <sc>Planetary Shield</sc> ability cannot use the <i>Magen Defense Grid</i> technology.</li>
+        <li>A war sun can use its <sc>Bombardment</sc> ability against planets that contain units that have the <sc>Planetary Shield</sc> ability.</li>
+    </ol>
+    </ol>
+
+<h2>Notes</h2>
+    <ol class="note">
+    <li>A unit with the <sc>Planetary Shield</sc> ability on a planet does not stop of the use of a unit&rsquo;s <sc>Bombardment</sc> ability on other planets in the same system.</li>
+    <li>If the <sc>Planetary Shield</sc> ability prevents the use of the  the use of a <sc>Bombardment</sc> ability, then the abilities of the <i>X&ndash;89 Bacterial Weapon &Omega;</i> or <i>X&ndash;89 Bacterial Weapon &Omega;&Omega;</i> technologies cannot be used.</li>
+    <li>If a war sun causes a unit to be treated as if it does not have a <sc>Planetary Shield</sc> ability, that unit may still use the ability of the <i>Magen Defense Grid &Omega;</i> or <i>Magen Defense Grid &Omega;&Omega;</i> technologies.</li>
+    <li>If a war sun causes a unit to be treated as if it does not have a <sc>Planetary Shield</sc> ability, all units in that system with a <sc>Bombardment</sc> ability may use it against the planet that unit is on.</li>
+    </ol>
+
+<h2>Related Topics</h2>
+    <ul>
+    <li><a href="R_abilities.html">Abilities</a></li>
+    <li><a href="R_bombardment.html">Bombardment</a></li>
+    <li><a href="R_invasion.html">Invasion</a></li>
+    <li><a href="R_pds.html">PDS</a></li>
+    </ul>
+</article>
+<footer>
+<p><a href="index.html" style="font-size:2em;">Home</a></p>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>Static mirror for offline use. All content and credit belong to
+<a href="https://github.com/dangothemango/tirules">dangothemango on GitHub</a>
+&mdash; original site at <a href="https://tirules2.com">tirules2.com</a>.</p>
+<p><span style="background-color: #fffacd; padding: 0.25em 0.5em; box-shadow: inset 4px 0 0 0 #ffa500; color: black;">Content highlighted in this color</span> reflects official rulings from Dane and are not part of the Living Rules Reference.</p>
+</footer>
+</body>
+</html>

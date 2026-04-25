@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="utf-8" http-equiv="encoding"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Infantry Tokens - Twilight Imperium Rules</title>
+<link rel="icon" href="favicon.png"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script>
+(function () {
+    var hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    window.addEventListener('DOMContentLoaded', function () {
+        var article = document.querySelector('article');
+        if (!article) return;
+        var re = new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null, false);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        var first = null;
+        nodes.forEach(function (node) {
+            if (!node.nodeValue.trim()) return;
+            var m, last = 0, frag = document.createDocumentFragment();
+            re.lastIndex = 0;
+            while ((m = re.exec(node.nodeValue)) !== null) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+                var mark = document.createElement('mark');
+                mark.textContent = m[0];
+                if (!first) first = mark;
+                frag.appendChild(mark);
+                last = m.index + m[0].length;
+            }
+            if (last > 0) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            }
+        });
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+</head>
+<body>
+<nav class="search-bar">
+<form action="search.html">
+<input type="search" name="q" placeholder="Search rules&hellip;" id="search-input">
+<button type="submit">Search</button>
+</form>
+</nav>
+<header><h1>Infantry Tokens</h1></header>
+<article>
+<h2>Rules Reference</h2>
+<style> .lrr > li:before, .lrr > h2 > li:before {content: '46.' counter(item, decimal);} </style>
+<p>An infantry token functions as a plastic infantry unit for all game purposes.</p>
+    <ol class="lrr">
+    <li>When producing an infantry unit, a player can use an infantry token from the supply instead of a plastic piece.</li>
+    <li>Players can replace their plastic infantry with tokens at any time.</li>
+    <li>If a player ever has an infantry token on a planet that does not contain one of their plastic infantry or in the space area of a system that does not contain one of their plastic infantry, that player must replace it with one of their plastic infantry from their reinforcements.</li>
+    <ol><li>If the player cannot replace the token, the unit is destroyed.</li></ol>
+    <li>Infantry tokens come in values of one and three. A player can swap between these tokens as necessary.</li>
+    </ol>
+
+<h2>Notes</h2>
+    <ol class="note">
+    <li>As each player only has twelve plastic infantry figures, a player cannot have infantry on more than twelve planets or being transported in more than twelve space areas, or any combination thereof.</li>
+    <li>Players may also swap infantry tokens for plastic pieces at any time.</li>
+    <li>Infantry tokens are not component limited.</li>
+    <li>A player may remove a plastic infantry figure from a planet or space area, along with any accompanying infantry tokens, if doing so allows them to swap it into the active system and allows them to commit ground forces to and fight ground combats on multiple planets during the <b>Invasion</b> step of the tactical action in that system when they could otherwise not do so.</li>
+    <li>A future rule change will have any unaccompanied infantry tokens removed, instead of destroyed.</li>
+    </ol>
+
+<h2>Related Topics</h2>
+    <ul>
+    <li><a href="R_component_limitations.html">Component Limitations</a></li>
+    <li><a href="R_fighter_tokens.html">Fighter Tokens</a></li>
+    <li><a href="R_producing_units.html">Producing Units</a></li>
+    </ul>
+</article>
+<footer>
+<p><a href="index.html" style="font-size:2em;">Home</a></p>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>Static mirror for offline use. All content and credit belong to
+<a href="https://github.com/dangothemango/tirules">dangothemango on GitHub</a>
+&mdash; original site at <a href="https://tirules2.com">tirules2.com</a>.</p>
+<p><span style="background-color: #fffacd; padding: 0.25em 0.5em; box-shadow: inset 4px 0 0 0 #ffa500; color: black;">Content highlighted in this color</span> reflects official rulings from Dane and are not part of the Living Rules Reference.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="utf-8" http-equiv="encoding"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mechs - Twilight Imperium Rules</title>
+<link rel="icon" href="favicon.png"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script>
+(function () {
+    var hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    window.addEventListener('DOMContentLoaded', function () {
+        var article = document.querySelector('article');
+        if (!article) return;
+        var re = new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null, false);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        var first = null;
+        nodes.forEach(function (node) {
+            if (!node.nodeValue.trim()) return;
+            var m, last = 0, frag = document.createDocumentFragment();
+            re.lastIndex = 0;
+            while ((m = re.exec(node.nodeValue)) !== null) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+                var mark = document.createElement('mark');
+                mark.textContent = m[0];
+                if (!first) first = mark;
+                frag.appendChild(mark);
+                last = m.index + m[0].length;
+            }
+            if (last > 0) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            }
+        });
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+</head>
+<body>
+<nav class="search-bar">
+<form action="search.html">
+<input type="search" name="q" placeholder="Search rules&hellip;" id="search-input">
+<button type="submit">Search</button>
+</form>
+</nav>
+<header><h1>Mechs</h1></header>
+<article>
+<h2>Rules Reference</h2>
+<style> .lrr > li:before, .lrr > h2 > li:before {content: '55.' counter(item, decimal);} </style>
+<p>Mechs are unique, faction&ndash;specific heavy ground forces.</p>
+    <ol class="lrr">
+    <li>Mechs are a type of ground force and can be transported and participate in ground combat.</li>
+    <li>Each player begins with their mech unit card in play on their leader sheet and can produce mechs for the cost presented on the card.</li>
+    <li>Some mechs have <sc>Deploy</sc> abilities which allow a player to place them on the game board without producing them normally.</li>
+    <li>Mech unit cards are not technologies.</li>
+    </ol>
+
+<h2>Notes</h2>
+    <ol class="note">
+    <li>Effects that refer to &ldquo;ground forces&rdquo; apply to mechs. Effects that refer to &ldquo;infantry&rdquo; do not.</li>
+    <li>For notes about a mech of a specific faction, see that faction&rsquo;s page.</li>
+    </ol>
+
+<h2>Related Topics</h2>
+    <ul>
+    <li><a href="R_deploy.html">Deploy</a></li>
+    <li><a href="R_ground_forces.html">Ground Forces</a></li>
+    <li><a href="R_leader_sheet.html">Leader Sheet</a></li>
+    <li><a href="R_units.html">Units</a></li>
+    </ul>
+</article>
+<footer>
+<p><a href="index.html" style="font-size:2em;">Home</a></p>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>Static mirror for offline use. All content and credit belong to
+<a href="https://github.com/dangothemango/tirules">dangothemango on GitHub</a>
+&mdash; original site at <a href="https://tirules2.com">tirules2.com</a>.</p>
+<p><span style="background-color: #fffacd; padding: 0.25em 0.5em; box-shadow: inset 4px 0 0 0 #ffa500; color: black;">Content highlighted in this color</span> reflects official rulings from Dane and are not part of the Living Rules Reference.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="utf-8" http-equiv="encoding"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Expeditions - Twilight Imperium Rules</title>
+<link rel="icon" href="favicon.png"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script>
+(function () {
+    var hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    window.addEventListener('DOMContentLoaded', function () {
+        var article = document.querySelector('article');
+        if (!article) return;
+        var re = new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null, false);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        var first = null;
+        nodes.forEach(function (node) {
+            if (!node.nodeValue.trim()) return;
+            var m, last = 0, frag = document.createDocumentFragment();
+            re.lastIndex = 0;
+            while ((m = re.exec(node.nodeValue)) !== null) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+                var mark = document.createElement('mark');
+                mark.textContent = m[0];
+                if (!first) first = mark;
+                frag.appendChild(mark);
+                last = m.index + m[0].length;
+            }
+            if (last > 0) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            }
+        });
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+</head>
+<body>
+<nav class="search-bar">
+<form action="search.html">
+<input type="search" name="q" placeholder="Search rules&hellip;" id="search-input">
+<button type="submit">Search</button>
+</form>
+</nav>
+<header><h1>Expeditions</h1></header>
+<article>
+<h2>Rules Reference</h2>
+<p>There currently does not exist a Living Rules Reference section regarding expeditions.</p>
+
+<h2>Notes</h2>
+    <ol class="note">
+    <li>A player may perform an expedition, which will unlock their breakthrough, and potentially put The Fracture and/or Thunder&rsquo;s Edge into play.</li>
+    <li>At the end of their turn, a player may perform an expedition. To do so they choose one of the unclaimed slices on the expedition token. They pay the indicated cost, and place one of their control tokens in the indicated area to claim it.</li>
+    <li>When a player performs an expedition, they gain their faction&rsquo;s breakthrough if they do not already have it. This will trigger a breakthrough roll to possibly place The Fracture into play.</li>
+    <li>The costs to perform an expedition are, in clockwise order from the top of the expedition token:</li>
+    <ol>
+        <li>Spend five resources;</li>
+        <li>Discard two action cards;</li>
+        <li>Spend five influence;</li>
+        <li>Discard one unscored secret objective;</li>
+        <li>Exhaust a planet that has a technology speciality; or</li>
+        <li>Spend three trade goods.</li>
+    </ol>
+    <li>One player may claim multiple slices, but no more than one slice per turn. A single slice cannot be claimed multiple times (neither by the same or different players).</li>
+    <ol><li>If a player already has their breakthrough when they claim a slice, no additional effect will trigger, other than for the sixth and final slice.</li></ol>
+    <li>Once the sixth and final slice has been claimed, Thunder&rsquo;s Edge will enter play.</li>
+    <ol>
+        <li>First, all command tokens on the expedition token are returned to the respective player&rsquo;s reinforcements, noting which player(s) had the most claimed slices.</li>
+        <li>Then, the player who claimed the sixth and final slice flips the expedition token to the Thunder&rsquo;s Edge side, and places it in a system on the game board. They must choose a system that does not contain a planet, a supernova, or a printed wormhole, and is not in The Fracture, should it be in play.</li>
+        <li>Finally, the player who had claimed the most slices of the expedition token places a number of infantry equal to the number of slices they had claimed on to Thunder&rsquo;s Edge. If multiple players are tied for the most number of slices, the player placing Thunder&rsquo;s Edge chooses one of those players to place the infantry; they may choose themself. The player placing the infantry then gains control of Thunder&rsquo;s Edge.</li>
+        <li>If Thunder&rsquo;s Edge is place in a system containing a frontier token, that token is not removed. It may be explored by a player with the <i>Dark Energy Tap</i> technology at a later point in time.</li>
+    </ol>
+    <li>If a player has not gained their breakthrough by the time Thunder&rsquo;s Edge is placed, they will be unable to gain their breakthrough by performing an expedition.</li>
+    </ol>
+
+<h2>Related Topics</h2>
+    <ul>
+    <li><a href="R_breakthroughs.html">Breakthroughs</a></li>
+    <li><a href="R_fracture.html">The Fracture</a></li>
+    </ul>
+</article>
+<footer>
+<p><a href="index.html" style="font-size:2em;">Home</a></p>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>Static mirror for offline use. All content and credit belong to
+<a href="https://github.com/dangothemango/tirules">dangothemango on GitHub</a>
+&mdash; original site at <a href="https://tirules2.com">tirules2.com</a>.</p>
+<p><span style="background-color: #fffacd; padding: 0.25em 0.5em; box-shadow: inset 4px 0 0 0 #ffa500; color: black;">Content highlighted in this color</span> reflects official rulings from Dane and are not part of the Living Rules Reference.</p>
+</footer>
+</body>
+</html>

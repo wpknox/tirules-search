@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="utf-8" http-equiv="encoding"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Status Phase - Twilight Imperium Rules</title>
+<link rel="icon" href="favicon.png"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script>
+(function () {
+    var hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    window.addEventListener('DOMContentLoaded', function () {
+        var article = document.querySelector('article');
+        if (!article) return;
+        var re = new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null, false);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        var first = null;
+        nodes.forEach(function (node) {
+            if (!node.nodeValue.trim()) return;
+            var m, last = 0, frag = document.createDocumentFragment();
+            re.lastIndex = 0;
+            while ((m = re.exec(node.nodeValue)) !== null) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+                var mark = document.createElement('mark');
+                mark.textContent = m[0];
+                if (!first) first = mark;
+                frag.appendChild(mark);
+                last = m.index + m[0].length;
+            }
+            if (last > 0) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            }
+        });
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+</head>
+<body>
+<nav class="search-bar">
+<form action="search.html">
+<input type="search" name="q" placeholder="Search rules&hellip;" id="search-input">
+<button type="submit">Search</button>
+</form>
+</nav>
+<header><h1>Status Phase</h1></header>
+<article>
+<h2>Rules Reference</h2>
+<style> .lrr > li:before, .lrr > h2 > li:before {content: '81.' counter(item, decimal);} </style>
+<p>During the status phase, players score objectives and prepare for the next game round. To resolve the status phase, players perform the following steps:</p>
+    <ol class="lrr">
+    <li><b>Step 1 &ndash; Score Objectives</b>: Following initiative order, each player may score up to one public objective and one secret objective that can be fulfilled during the status phase. To score an objective, a player must fulfill the requirements on the card; if that player does, they gain a number of victory points indicated on the card.</li>
+    <li><b>Step 2 &ndash; Reveal Public Objective</b>: The speaker reveals an unrevealed public objective card by flipping that card faceup.</li>
+    <ol>
+        <li>The speaker cannot reveal &ldquo;Stage II&rdquo; objectives until all &ldquo;Stage I&rdquo; objectives are revealed.</li>
+        <li>The game ends if there are no unrevealed public objectives at the start of this step.</li>
+    </ol>
+    <li><b>Step 3 &ndash; Draw Action Cards</b>: Following initiative order, each player draws one action card.</li>
+    <li><b>Step 4 &ndash; Remove Command Tokens</b>: Each player removes all of their command tokens from the game board. Each player returns each removed token to their reinforcements.</li>
+    <li><b>Step 5 &ndash; Gain and Redistribute Command Tokens</b>: Each player gains two command tokens. A player takes each gained token from their reinforcements. Then, each player can redistribute each command token on their command sheet, including the two they just gained, among their strategy, tactic, and fleet pools.</li>
+    <ol>
+        <li>Players should remember to check the number of their ships in each system after reducing the size of their fleet pools.</li>
+        <li>This step can usually be resolved simultaneously, but if there is a timing conflict, it is resolved in initiative order.</li>
+    </ol>
+    <li><b>Step 6 &ndash; Ready Cards</b>: Each player readies all of their exhausted cards, including strategy cards.</li>
+    <li><b>Step 7 &ndash; Repair Units</b>: Each player repairs all of their damaged units by turning those units upright.</li>
+    <li><b>Step 8 &ndash; Return Strategy Cards</b>: Each player returns their strategy card to the common play area. Then, if a player has removed the custodians token from Mecatol Rex, the game round continues to the agenda phase. Otherwise, a new game round begins with the strategy phase.</li>
+    </ol>
+
+<h2>Notes</h2>
+    <ol class="note">
+    <li>A player cannot score public objectives if that player does not control each planet in their home system.</li>
+    <li>If there are few cards remaining in the action card deck, they will be dealt out first to the players lowest in initiative order. After those players have discarded down to their seven card hand limit, if necessary, the discard pile will be shuffled to form a new deck. The remaining players (including the player who received the last action card from the previous deck, if applicable) will then be dealt their action cards.</li>
+    <li>All damaged units will be repaired, even if a game effect has caused those units to no longer have the <sc>Sustain Damage</sc> ability.</li> 
+    </ol>
+
+<h2>Related Topics</h2>
+    <ul>
+    <li><a href="R_action_cards.html">Action Cards</a></li>
+    <li><a href="R_agenda_phase.html">Agenda Phase</a></li>
+    <li><a href="R_custodians_token.html">Custodians Token</a></li>
+    <li><a href="R_command_tokens.html">Command Tokens</a></li>
+    <li><a href="R_game_round.html">Game Round</a></li>
+    <li><a href="R_initiative_order.html">Initiative Order</a></li>
+    <li><a href="R_objective_cards.html">Objective Cards</a></li>
+    <li><a href="R_readied.html">Readied</a></li>
+    <li><a href="R_strategy_card.html">Strategy Card</a></li>
+    <li><a href="R_sustain_damage.html">Sustain Damage</a></li>
+    <li><a href="R_victory_points.html">Victory Points</a></li>
+    </ul>
+</article>
+<footer>
+<p><a href="index.html" style="font-size:2em;">Home</a></p>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>Static mirror for offline use. All content and credit belong to
+<a href="https://github.com/dangothemango/tirules">dangothemango on GitHub</a>
+&mdash; original site at <a href="https://tirules2.com">tirules2.com</a>.</p>
+<p><span style="background-color: #fffacd; padding: 0.25em 0.5em; box-shadow: inset 4px 0 0 0 #ffa500; color: black;">Content highlighted in this color</span> reflects official rulings from Dane and are not part of the Living Rules Reference.</p>
+</footer>
+</body>
+</html>

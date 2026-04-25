@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="utf-8" http-equiv="encoding"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Capture - Twilight Imperium Rules</title>
+<link rel="icon" href="favicon.png"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script>
+(function () {
+    var hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    window.addEventListener('DOMContentLoaded', function () {
+        var article = document.querySelector('article');
+        if (!article) return;
+        var re = new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null, false);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        var first = null;
+        nodes.forEach(function (node) {
+            if (!node.nodeValue.trim()) return;
+            var m, last = 0, frag = document.createDocumentFragment();
+            re.lastIndex = 0;
+            while ((m = re.exec(node.nodeValue)) !== null) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+                var mark = document.createElement('mark');
+                mark.textContent = m[0];
+                if (!first) first = mark;
+                frag.appendChild(mark);
+                last = m.index + m[0].length;
+            }
+            if (last > 0) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            }
+        });
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+</head>
+<body>
+<nav class="search-bar">
+<form action="search.html">
+<input type="search" name="q" placeholder="Search rules&hellip;" id="search-input">
+<button type="submit">Search</button>
+</form>
+</nav>
+<header><h1>Capture</h1></header>
+<article>
+<h2>Rules Reference</h2>
+<style> .lrr > li:before, .lrr > h2 > li:before {content: '17.' counter(item, decimal);} </style>
+<p>Some abilities instruct a player to capture a unit, preventing the unit&rsquo;s original owner from using it.</p>
+    <ol class="lrr">
+    <li>If a player captures a non&ndash;fighter ship or mech, they place it on their faction sheet. When such a unit is returned, it is placed into the reinforcements of the original owner.</li>
+    <li>A captured non&ndash;fighter ship or mech is returned under the following circumstances:</li>
+    <ol>
+        <li>If the player who captured the unit agrees to return it as part of a transaction.</li>
+        <li>If an ability instructs the capturing player to return the unit as part of an ability&rsquo;s cost.</li>
+        <li>If the player whose unit was captured blockades a space dock of the player who captured the unit.</li>
+    </ol>
+    <li>If a player captures a fighter or infantry, it is placed in its reinforcements instead of on the capturing player&rsquo;s faction sheet; the capturing player places a fighter or infantry token from the supply on their faction sheet instead.</li>
+    <ol>
+        <li>Captured fighters and infantry do not belong to any player and are returned only when an ability instructs the capturing player to do so.</li>
+        <li>Captured fighters and infantry cannot be returned as part of a transaction.</li>
+        <li>Captured fighters and infantry are not returned as the result of a blockade.</li>
+    </ol>
+    <li>When a captured fighter or infantry is returned, it is placed in the supply.</li>
+    <li>While a unit is captured, it cannot be produced or placed by its original owner until it is returned.</li>
+    <li>If one or more of a player&rsquo;s space docks is being blockaded, that player cannot capture units from the blockading players.</li>
+    </ol>
+
+<h2>Notes</h2>
+    <ol class="note">
+    <li>For additional information, see the <a href="F_vuilraith.html">Vuil&rsquo;raith faction notes page</a>.</li>
+	<li>Units are returned as soon as a space dock is blockaded. If this occurs at the end of the <b>Space Combat</b> step of a tactical action, the units will be returned before the <b>Invasion</b> step, in which the space dock could potentially be destroyed.</li>
+    <li>A captured unit may only be returned to the player that originally owned it, and not to another player.</li>
+    <li>The Nekro player and the Yssaril player are able to capture units by copying the Vuil&rsquo;raith player&rsquo;s abilities, but they will be unable to spend the captured units.</li>
+    <li>If a player is eliminated, any of their units that are captured remain with the player that captured them. When the capturing player would return them, the units are instead returned to the game box.</li>
+	<li>If a player captures their own units, they cannot be returned to that player&rsquo;s reinforcements, unless instructed to do so by a game effect.</li>
+	<ol>
+        <li>That player cannot produce or place those units, except by effects that allow that player to use captured units.</li>
+    </ol>
+    <li>If a player has all of their units of one type on the game board or captured, and so have none in their reinforcements, and would place a unit of that type, they may remove a unit from any system on the game board that does not contain one of their command tokens and place that unit in their reinforcements, before placing that unit on the game board.</li>
+    <li>A player cannot capture fighter or infantry tokens corresponding to units belonging to a player that is blockading one of their space docks.</li>
+    </ol>
+
+<h2>Related Topics</h2>
+    <ul>
+    <li><a href="R_blockaded.html">Blockaded</a></li>
+    <li><a href="R_fighter_tokens.html">Fighter Tokens</a></li>
+    <li><a href="R_infantry_tokens.html">Infantry Tokens</a></li>
+    <li><a href="R_transactions.html">Transactions</a></li>
+    </ul>
+</article>
+<footer>
+<p><a href="index.html" style="font-size:2em;">Home</a></p>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>Static mirror for offline use. All content and credit belong to
+<a href="https://github.com/dangothemango/tirules">dangothemango on GitHub</a>
+&mdash; original site at <a href="https://tirules2.com">tirules2.com</a>.</p>
+<p><span style="background-color: #fffacd; padding: 0.25em 0.5em; box-shadow: inset 4px 0 0 0 #ffa500; color: black;">Content highlighted in this color</span> reflects official rulings from Dane and are not part of the Living Rules Reference.</p>
+</footer>
+</body>
+</html>

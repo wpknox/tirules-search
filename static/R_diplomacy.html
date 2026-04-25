@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="utf-8" http-equiv="encoding"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Diplomacy (Strategy Card) - Twilight Imperium Rules</title>
+<link rel="icon" href="favicon.png"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script>
+(function () {
+    var hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    window.addEventListener('DOMContentLoaded', function () {
+        var article = document.querySelector('article');
+        if (!article) return;
+        var re = new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null, false);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        var first = null;
+        nodes.forEach(function (node) {
+            if (!node.nodeValue.trim()) return;
+            var m, last = 0, frag = document.createDocumentFragment();
+            re.lastIndex = 0;
+            while ((m = re.exec(node.nodeValue)) !== null) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+                var mark = document.createElement('mark');
+                mark.textContent = m[0];
+                if (!first) first = mark;
+                frag.appendChild(mark);
+                last = m.index + m[0].length;
+            }
+            if (last > 0) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            }
+        });
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+</head>
+<body>
+<nav class="search-bar">
+<form action="search.html">
+<input type="search" name="q" placeholder="Search rules&hellip;" id="search-input">
+<button type="submit">Search</button>
+</form>
+</nav>
+<header><h1>Diplomacy <sub>(Strategy Card)</sub></h1></header>
+<article>
+<h2>Rules Reference</h2>
+<style> .lrr > li:before, .lrr > h2 > li:before {content: '32.' counter(item, decimal);} </style>
+<p>The <i>Diplomacy</i> strategy card can be used to preemptively prevent other players from activating a specific system. It can also be used to ready planets. This card&rsquo;s initiative value is &ldquo;2&rdquo;.</p>
+    <ol class="lrr">
+    <li>During the action phase, if the active player has the <i>Diplomacy</i> strategy card, they can perform a strategic action to resolve that card&rsquo;s primary ability.</li>
+    <li>To resolve the primary ability on the <i>Diplomacy</i> strategy card, the active player chooses a system that contains a planet they control other than the Mecatol Rex system; each other player places one command token from their reinforcements in that system. Then, the active player readies any two of their exhausted planets.</li>
+    <ol>
+        <li>If a player has no command tokens in their reinforcements, that player places one command token of their choice from their command sheet.</li>
+        <li>If a player already has a command token in the chosen system, they do not place a command token there.</li>
+    </ol>
+    <li>After the active player resolves the primary ability of the <i>Diplomacy</i> strategy card, each other player, beginning with the player to the left of the active player and proceeding clockwise, may spend one command token from their strategy pool to ready up to two exhausted planets they control.</li>
+    </ol>
+
+<h2>Notes</h2>
+    <ol class="note">
+    <li>If the player with <i>Diplomacy</i> controls no planets, or controls only Mecatol Rex, they may still perform a strategic action. However, other players will no place a command token in any system.</li>
+    <li>If the player with <i>Diplomacy</i> controls fewer than two exhausted planets, they may still perform a strategic action. They will ready as many planets as possible.</li>
+    <li>The Diplomacy token represents a command token from each player other than the player with the <i>Diplomacy</i> strategy card. It may be used to simplify play when no player is expected to interact with the command tokens placed by the primary ability, especially during early rounds.</li>
+    <ol>
+        <li>The use of the Diplomacy token should have no mechanical effect on the game state. At all times, it should be able to be replaced with a command token from the reinforcements of each player, other than the player with the <i>Diplomacy</i> strategy card, with no effect on the game state.</li>
+        <li>In particular, a player cannot increase the number of tokens they have access to from the use of the Diplomacy token. After a player has played <i>Diplomacy</i>, should they use the Diplomacy token, then each other player must keep a command token available in their reinforcements that corresponds to the command token represented by the Diplomacy token.</li>
+        <li>Game effects that can remove a command token from a system may still be used to remove a command token from the system containing the Diplomacy token. Should this happen, players may first wish to replace the Diplomacy token with the corresponding command tokens, then remove the required command token, leaving the rest in the system.</li>
+        <li>The system that contains the Diplomacy token should be treated as containing a command token of the relevant players for all game effects. Primarily this means that the system cannot be activated by those players, nor can they move ships or transport units out of it. Other relevant effects include preventing a second command token from being placed in that system should a player resolve a <i>Skilled Retreat</i> action card to move ships into that system, or allowing the Argent player to move ships into that system with <i>Helix Protocol</i>, their hero ability.</li>
+    </ol>
+    </ol>
+
+<h2>Related Topics</h2>
+    <ul>
+    <li><a href="R_active_system.html">Active System</a></li>
+    <li><a href="R_command_tokens.html">Command Tokens</a></li>
+    <li><a href="R_initiative_order.html">Initiative Order</a></li>
+    <li><a href="R_planets.html">Planets</a></li>
+    <li><a href="R_readied.html">Readied</a></li>
+    <li><a href="R_strategic_action.html">Strategic Action</a></li>
+    <li><a href="R_strategy_card.html">Strategy Card</a></li>
+    </ul>
+</article>
+<footer>
+<p><a href="index.html" style="font-size:2em;">Home</a></p>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>Static mirror for offline use. All content and credit belong to
+<a href="https://github.com/dangothemango/tirules">dangothemango on GitHub</a>
+&mdash; original site at <a href="https://tirules2.com">tirules2.com</a>.</p>
+<p><span style="background-color: #fffacd; padding: 0.25em 0.5em; box-shadow: inset 4px 0 0 0 #ffa500; color: black;">Content highlighted in this color</span> reflects official rulings from Dane and are not part of the Living Rules Reference.</p>
+</footer>
+</body>
+</html>

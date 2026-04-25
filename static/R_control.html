@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="utf-8" http-equiv="encoding"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Control - Twilight Imperium Rules</title>
+<link rel="icon" href="favicon.png"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script>
+(function () {
+    var hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    window.addEventListener('DOMContentLoaded', function () {
+        var article = document.querySelector('article');
+        if (!article) return;
+        var re = new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null, false);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        var first = null;
+        nodes.forEach(function (node) {
+            if (!node.nodeValue.trim()) return;
+            var m, last = 0, frag = document.createDocumentFragment();
+            re.lastIndex = 0;
+            while ((m = re.exec(node.nodeValue)) !== null) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+                var mark = document.createElement('mark');
+                mark.textContent = m[0];
+                if (!first) first = mark;
+                frag.appendChild(mark);
+                last = m.index + m[0].length;
+            }
+            if (last > 0) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            }
+        });
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+</head>
+<body>
+<nav class="search-bar">
+<form action="search.html">
+<input type="search" name="q" placeholder="Search rules&hellip;" id="search-input">
+<button type="submit">Search</button>
+</form>
+</nav>
+<header><h1>Control</h1></header>
+<article>
+<h2>Rules Reference</h2>
+<style> .lrr > li:before, .lrr > h2 > li:before {content: '25.' counter(item, decimal);} </style>
+<p>Each player begins the game with control of each planet in their home system. During the game, players can gain control of additional planets.</p>
+    <ol class="lrr">
+    <li>When a player gains control of a planet, they take the planet card that corresponds to that planet and place it in their play area; that card is exhausted.</li>
+    <ol>
+        <li>If a player is the first player to control a planet, they take the planet card from the planet card deck.</li>
+        <li>If another player controls the planet, they take that planet&rsquo;s card from the other player&rsquo;s play area.</li>
+        <li>When a player gains control of a planet that is not already controlled by another player, they explore that planet.</li>
+    </ol>
+    <li>A player cannot gain control of a planet that they already control.</li>
+    <li>While a player controls a planet, that planet&rsquo;s card remains in their play area until they lose control of that planet.</li>
+    <li>A player can control a planet that they do not have any units on; that player places a control token on that planet to mark that they control it.</li>
+    <li>A player loses control of a planet if they no longer have units on it and another player has units on it.</li>
+    <ol>
+        <li>The player that placed units on the planet gains control of that planet.</li>
+        <li>During the <b>Invasion</b> step of a tactical action, control is determined during the <b>Establish Control</b> step instead.</li>
+    </ol>
+    <li>A player can lose control of a planet through some game effects.</li>
+    <li>If a player loses control of a planet that contains their control token, they remove their control token from the planet.</li>
+    </ol>
+
+<h2>Notes</h2>
+    <ol class="note">
+    <li>Control tokens are not component limited; a player may control an unlimited number of planets.</li>
+    </ol>
+
+<h2>Related Topics</h2>
+    <ul>
+    <li><a href="R_attach.html">Attach</a></li>
+    <li><a href="R_exhausted.html">Exhausted</a></li>
+    <li><a href="R_invasion.html">Invasion</a></li>
+    <li><a href="R_planets.html">Planets</a></li>
+    </ul>
+</article>
+<footer>
+<p><a href="index.html" style="font-size:2em;">Home</a></p>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>Static mirror for offline use. All content and credit belong to
+<a href="https://github.com/dangothemango/tirules">dangothemango on GitHub</a>
+&mdash; original site at <a href="https://tirules2.com">tirules2.com</a>.</p>
+<p><span style="background-color: #fffacd; padding: 0.25em 0.5em; box-shadow: inset 4px 0 0 0 #ffa500; color: black;">Content highlighted in this color</span> reflects official rulings from Dane and are not part of the Living Rules Reference.</p>
+</footer>
+</body>
+</html>

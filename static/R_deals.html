@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="utf-8" http-equiv="encoding"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Deals - Twilight Imperium Rules</title>
+<link rel="icon" href="favicon.png"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script>
+(function () {
+    var hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    window.addEventListener('DOMContentLoaded', function () {
+        var article = document.querySelector('article');
+        if (!article) return;
+        var re = new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null, false);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        var first = null;
+        nodes.forEach(function (node) {
+            if (!node.nodeValue.trim()) return;
+            var m, last = 0, frag = document.createDocumentFragment();
+            re.lastIndex = 0;
+            while ((m = re.exec(node.nodeValue)) !== null) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+                var mark = document.createElement('mark');
+                mark.textContent = m[0];
+                if (!first) first = mark;
+                frag.appendChild(mark);
+                last = m.index + m[0].length;
+            }
+            if (last > 0) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            }
+        });
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+</head>
+<body>
+<nav class="search-bar">
+<form action="search.html">
+<input type="search" name="q" placeholder="Search rules&hellip;" id="search-input">
+<button type="submit">Search</button>
+</form>
+</nav>
+<header><h1>Deals</h1></header>
+<article>
+<h2>Rules Reference</h2>
+<style> .lrr > li:before, .lrr > h2 > li:before {content: '28.' counter(item, decimal);} </style>
+<p>A deal is an agreement between two players that may or may not include a transaction that involves physical components.</p>
+    <ol class="lrr">
+    <li>Players can make deals with each other at any time, even if they are not neighbors. However, deals that include a transaction must follow the rules for transactions, including that the players be neighbors.</li>
+    <li>Deals are binding or non&ndash;binding according to the conditions of the deal.</li>
+    <li>If the terms of a deal can be resolved immediately, it is a binding deal. When a deal is binding, a player must adhere to the terms of the agreement and whatever transactions, if any, were agreed upon.</li>
+    <ol><li>The results of playing an action card, including the act of successfully resolving a card, are not instantaneous and cannot be guaranteed. They cannot be part of a binding deal.</li></ol>
+    <li>If the terms of a deal cannot be resolved immediately, it is a non&ndash;binding deal. When a deal is non&ndash;binding, a player does not have to adhere to any part of the agreement.</li>
+    </ol>
+
+<h2>Notes</h2>
+    <ol class="note">
+    <li>In general, only the terms of the deal that a player can immediately perform, even without the deal taking place, are binding. For example:</li>
+    <ol>
+        <li>If a player has four resources available during the <b>Production</b> step of a tactical action, another player may give them four trade goods on the condition that they produce a dreadnought during this <b>Production</b> step. As the active player could produce a dreadnought with the resources, this deal is binding.</li>
+        <li>If instead the active player has zero resources available, the same deal would be non&ndash;binding.</li>
+    </ol>
+    <li>The following are further examples of non&ndash;binding deals:</li>
+    <ol>
+        <li>Making a deal to use a promissory note in a specific way, before the promissory note has been transacted.</li>
+        <li>Making a deal to not make use of a unit&rsquo;s <sc>Space Cannon</sc> ability during a tactical action, before ships have been moved.</li>
+        <li>Making a deal to trade commodities in exchange for the active player to replenish another player&rsquo;s commodities during the resolution of the primary ability of the <i>Trade</i> strategic action.</li>
+        <li>Making a deal for a player to vote on an agenda in a certain way, when it is not yet that player&rsquo;s opportunity to vote.</li>
+        <li>Any deal that will resolve after dice are rolled.</li>
+    </ol>
+    </ol>
+
+<h2>Related Topics</h2>
+    <ul>
+    <li><a href="R_promissory_notes.html">Promissory Notes</a></li>
+    <li><a href="R_trade_goods.html">Trade Goods</a></li>
+    <li><a href="R_transactions.html">Transactions</a></li>
+    </ul>
+</article>
+<footer>
+<p><a href="index.html" style="font-size:2em;">Home</a></p>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>Static mirror for offline use. All content and credit belong to
+<a href="https://github.com/dangothemango/tirules">dangothemango on GitHub</a>
+&mdash; original site at <a href="https://tirules2.com">tirules2.com</a>.</p>
+<p><span style="background-color: #fffacd; padding: 0.25em 0.5em; box-shadow: inset 4px 0 0 0 #ffa500; color: black;">Content highlighted in this color</span> reflects official rulings from Dane and are not part of the Living Rules Reference.</p>
+</footer>
+</body>
+</html>

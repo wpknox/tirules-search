@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Twilight Imperium Rule Help</title>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="utf-8" http-equiv="encoding"/>
+<meta name="author" content="BradleyΣ"/>
+<meta name="version" content="v0.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="canonical" href="https://tirules2.com/"/>
+<link rel="icon" href="favicon.png"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script>
+(function () {
+    var hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    window.addEventListener('DOMContentLoaded', function () {
+        var article = document.querySelector('article');
+        if (!article) return;
+        var re = new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null, false);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        var first = null;
+        nodes.forEach(function (node) {
+            if (!node.nodeValue.trim()) return;
+            var m, last = 0, frag = document.createDocumentFragment();
+            re.lastIndex = 0;
+            while ((m = re.exec(node.nodeValue)) !== null) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+                var mark = document.createElement('mark');
+                mark.textContent = m[0];
+                if (!first) first = mark;
+                frag.appendChild(mark);
+                last = m.index + m[0].length;
+            }
+            if (last > 0) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            }
+        });
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+<style>
+.note
+{
+    counter-reset: nitem;
+}
+.lrr > li:before
+{
+    content: counter(item, decimal) '.';
+}
+</style>
+</head>
+<body>
+<nav class="search-bar">
+<form action="search.html" method="get">
+<input type="search" name="q" placeholder="Search rules&hellip;">
+<button type="submit">Search</button>
+</form>
+</nav>
+<header><h1>Twilight Imperium Rules</h1></header>
+<article>
+<p><strong>This is a work in progress.</strong></p>
+<p>This website contains the rules for Fantasy Flight&rsquo;s fourth edition of <i>Twilight Imperium</i>.</p>
+<p>Also available are various notes on those rules, based on rules found in other sections, rulings from Dane Beltrami and/or Fantasy Flight, or community consensus.</p>
+<p>All information on this website is based off of v2.0 of the Living Rules Reference, released November 2020. 
+    This includes the <i>Prophecy of Kings</i> expansion. 
+    Notes are included for the Codices, up to and including Codex IV, released June 2025, and preliminary notes are also included for the <i>Thunder&rsquo;s Edge</i> expansion, released October 2025, pending the publication of a new Living Rules Reference.</p>
+<p>For more on <i>Twilight Imperium</i>, please see its <a href="https://www.fantasyflightgames.com/en/products/twilight-imperium-fourth-edition/">page on the Fantasy Flight website.</a></p>
+<p style="font-family:lazax;">&ldquo;For as often as I reference (tirules.com), it's probably better than official&rdquo; - Dane Beltrami, TI4 Lead Designer.</p>
+<h1>Rule Topics</h1>
+<style>
+li.te:before
+{
+    content: 'n/a.';
+    counter-increment: item 0;
+}
+</style>
+    <ol class="lrr">
+    <li><a href="R_abilities.html">Abilities</a></li>
+    <li><a href="R_action_cards.html">Action Cards</a></li>
+    <li><a href="R_action_phase.html">Action Phase</a></li>
+    <li><a href="R_active_player.html">Active Player</a></li>
+    <li><a href="R_active_system.html">Active System</a></li>
+    <li><a href="R_adjacency.html">Adjacency</a></li>
+    <li><a href="R_agenda_card.html">Agenda Card</a></li>
+    <li><a href="R_agenda_phase.html">Agenda Phase</a></li>
+    <li><a href="R_anomalies.html">Anomalies</a></li>
+    <li><a href="R_anti_fighter_barrage.html">Anti&ndash;Fighter Barrage</a></li>
+    <li><a href="R_asteroid_field.html">Asteroid Field</a></li>
+    <li><a href="R_attach.html">Attach</a></li>
+    <li><a href="R_attacker.html">Attacker</a></li>
+    <li><a href="R_blockaded.html">Blockaded</a></li>
+    <li><a href="R_bombardment.html">Bombardment</a></li>
+    <li class="te"><a href="R_breakthroughs.html">Breakthroughs</a></li>
+    <li><a href="R_capacity.html">Capacity</a></li>
+    <li><a href="R_capture.html">Capture</a></li>
+    <li class="te"><a href="R_coexistence.html">Coexistence</a></li>
+    <li><a href="R_combat.html">Combat</a></li>
+    <li><a href="R_command_sheet.html">Command Sheet</a></li>
+    <li><a href="R_command_tokens.html">Command Tokens</a></li>
+    <li><a href="R_commodities.html">Commodities</a></li>
+    <li><a href="R_component_action.html">Component Action</a></li>
+    <li><a href="R_component_limitations.html">Component Limitations</a></li>
+    <li><a href="R_construction.html">Construction</a></li>
+    <li><a href="R_control.html">Control</a></li>
+    <li><a href="R_cost.html">Cost</a></li>
+    <li><a href="R_custodians_token.html">Custodians Token</a></li>
+    <li><a href="R_deals.html">Deals</a></li>
+    <li><a href="R_defender.html">Defender</a></li>
+    <li><a href="R_deploy.html">Deploy</a></li>
+    <li><a href="R_destroyed.html">Destroyed</a></li>
+    <li><a href="R_diplomacy.html">Diplomacy</a></li>
+    <li><a href="R_elimination.html">Elimination</a></li>
+    <li class="te"><a href="R_entropic_scars.html">Entropic Scars</a></li>
+    <li><a href="R_exhausted.html">Exhausted</a></li>
+    <li class="te"><a href="R_expedition.html">Expedition</a></li>
+    <li><a href="R_exploration.html">Exploration</a></li>
+    <li><a href="R_fighter_tokens.html">Fighter Tokens</a></li>
+    <li><a href="R_fleet_pool.html">Fleet Pool</a></li>
+    <li class="te"><a href="R_fracture.html">The Fracture</a></li>
+    <li><a href="R_frontier_tokens.html">Frontier Tokens</a></li>
+    <li><a href="R_game_board.html">Game Board</a></li>
+    <li><a href="R_game_round.html">Game Round</a></li>
+    <li><a href="R_gravity_rift.html">Gravity Rift</a></li>
+    <li><a href="R_ground_combat.html">Ground Combat</a></li>
+    <li><a href="R_ground_forces.html">Ground Forces</a></li>
+    <li><a href="R_hyperlanes.html">Hyperlanes</a></li>
+    <li><a href="R_imperial.html">Imperial</a></li>
+    <li><a href="R_infantry_tokens.html">Infantry Tokens</a></li>
+    <li><a href="R_influence.html">Influence</a></li>
+    <li><a href="R_initiative_order.html">Initiative Order</a></li>
+    <li><a href="R_invasion.html">Invasion</a></li>
+    <li><a href="R_leader_sheet.html">Leader Sheet</a></li>
+    <li><a href="R_leaders.html">Leaders</a></li>
+    <li><a href="R_leadership.html">Leadership</a></li>
+    <li><a href="R_legendary_planets.html">Legendary Planets</a></li>
+    <li><a href="R_mecatol_rex.html">Mecatol Rex</a></li>
+    <li><a href="R_mechs.html">Mechs</a></li>
+    <li><a href="R_modifiers.html">Modifiers</a></li>
+    <li><a href="R_move.html">Move</a></li>
+    <li><a href="R_movement.html">Movement</a></li>
+    <li><a href="R_nebula.html">Nebula</a></li>
+    <li><a href="R_neighbors.html">Neighbors</a></li>
+    <li class="te"><a href="R_neutral_units.html">Neutral Units</a></li>
+    <li><a href="R_objective_cards.html">Objective Cards</a></li>
+    <li><a href="R_opponent.html">Opponent</a></li>
+    <li><a href="R_pds.html">PDS</a></li>
+    <li><a href="R_planets.html">Planets</a></li>
+    <li><a href="R_planetary_shield.html">Planetary Shield</a></li>
+    <li><a href="R_politics.html">Politics</a></li>
+    <li><a href="R_producing_units.html">Producing Units</a></li>
+    <li><a href="R_production.html">Production</a></li>
+    <li><a href="R_promissory_notes.html">Promissory Notes</a></li>
+    <li><a href="R_purge.html">Purge</a></li>
+    <li><a href="R_readied.html">Readied</a></li>
+    <li><a href="R_reinforcements.html">Reinforcements</a></li>
+    <li><a href="R_relics.html">Relics</a></li>
+    <li><a href="R_rerolls.html">Rerolls</a></li>
+    <li><a href="R_resources.html">Resources</a></li>
+    <li><a href="R_ships.html">Ships</a></li>
+    <li><a href="R_space_cannon.html">Space Cannon</a></li>
+    <li><a href="R_space_combat.html">Space Combat</a></li>
+    <li><a href="R_space_dock.html">Space Dock</a></li>
+    <li class="te"><a href="R_space_stations.html">Space Stations</a></li>
+    <li><a href="R_speaker.html">Speaker</a></li>
+    <li><a href="R_status_phase.html">Status Phase</a></li>
+    <li><a href="R_strategic_action.html">Strategic Action</a></li>
+    <li><a href="R_strategy_card.html">Strategy Card</a></li>
+    <li><a href="R_strategy_phase.html">Strategy Phase</a></li>
+    <li><a href="R_structures.html">Structures</a></li>
+    <li><a href="R_supernova.html">Supernova</a></li>
+    <li><a href="R_sustain_damage.html">Sustain Damage</a></li>
+    <li class="te"><a href="R_synergy.html">Synergy</a></li>
+    <li><a href="R_system_tiles.html">System Tiles</a></li>
+    <li><a href="R_tactical_action.html">Tactical Action</a></li>
+    <li><a href="R_technology.html">Technology</a></li>
+    <li><a href="R_technology_sc.html">Technology <sub style="font-size: 66.67%; vertical-align: baseline;">(<abbr title="Strategy Card">S.C.</abbr>)</sub></a></li>
+    <li><a href="R_trade.html">Trade</a></li>
+    <li><a href="R_trade_goods.html">Trade Goods</a></li>
+    <li><a href="R_transactions.html">Transactions</a></li>
+    <li><a href="R_transport.html">Transport</a></li>
+    <li><a href="R_units.html">Units</a></li>
+    <li><a href="R_unit_upgrades.html">Unit Upgrades</a></li>
+    <li><a href="R_victory_points.html">Victory Points</a></li>
+    <li><a href="R_warfare.html">Warfare</a></li>
+    <li><a href="R_wormhole_nexus.html">Wormhole Nexus</a></li>
+    <li><a href="R_wormholes.html">Wormholes</a></li>
+    </ol>
+<h1>Faction Notes</h1>
+    <ol class="note">
+        <li><a href="F_arborec.html">The Arborec</a></li>
+        <li><a href="F_argent.html">The Argent Flight</a></li>
+        <li><a href="F_letnev.html">The Barony of Letnev</a></li>
+        <li><a href="F_saar.html">The Clan of Saar</a></li>
+        <li><a href="F_keleres.html">The Council Keleres</a></li>
+        <li><a href="F_rebellion.html">The Crimson Rebellion</a></li>
+        <li><a href="F_deepwrought.html">The Deepwrought Scholarate</a></li>
+        <li><a href="F_muaat.html">The Embers of Muaat</a></li>
+        <li><a href="F_hacan.html">The Emirates of Hacan</a></li>
+        <li><a href="F_empyrean.html">The Empyrean</a></li>
+        <li><a href="F_sol.html">The Federation of Sol</a></li>
+        <li><a href="F_firmament.html">The Firmament/The Obsidian</a></li>
+        <li><a href="F_creuss.html">The Ghosts of Creuss</a></li>
+        <li><a href="F_lizix.html">The L1Z1X Mindnet</a></li>
+        <li><a href="F_bastion.html">Last Bastion</a></li>
+        <li><a href="F_mahact.html">The Mahact Gene&ndash;Sorcerers</a></li>
+        <li><a href="F_mentak.html">The Mentak Coalition</a></li>
+        <li><a href="F_naalu.html">The Naalu Collective</a></li>
+        <li><a href="F_naaz_rokha.html">The Naaz&ndash;Rokha Alliance</a></li>
+        <li><a href="F_nekro.html">The Nekro Virus</a></li>
+        <li><a href="F_nomad.html">The Nomad</a></li>
+        <li><a href="F_ral_nel.html">The Ral Nel Consortium</a></li>
+        <li><a href="F_norr.html">Sardakk N&rsquo;orr</a></li>
+        <li><a href="F_ul.html">The Titans of Ul</a></li>
+        <li><a href="F_jol_nar.html">The Universities of Jol&ndash;Nar</a></li>
+        <li><a href="F_vuilraith.html">The Vuil&rsquo;raith Cabal</a></li>
+        <li><a href="F_winnu.html">The Winnu</a></li>
+        <li><a href="F_xxcha.html">The Xxcha Kingdom</a></li>
+        <li><a href="F_yin.html">The Yin Brotherhood</a></li>
+        <li><a href="F_yssaril.html">The Yssaril Tribes</a></li>
+    </ol>
+<h1>Component Notes</h1>
+    <ol class="note">
+        <li><a href="C_action_cards.html">Action Cards</a></li>
+        <li><a href="C_agendas.html">Agendas</a></li>
+        <li><a href="C_events.html">Events</a></li>
+        <li><a href="C_exploration_cards.html">Exploration Cards</a></li>
+        <li><a href="C_legendary_planets.html">Legendary Planets</a></li>
+        <li><a href="C_objectives.html">Objectives</a></li>
+        <li><a href="C_promissory_notes.html">Promissory Notes</a></li>
+        <li><a href="C_relics.html">Relics</a></li>
+        <li><a href="C_technology.html">Technology</a></li>
+        <li><a href="C_units.html">Units</a></li>
+    </ol>
+</article>
+<footer>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>This website is not affiliated with tirules.com. <a href="https://github.com/dangothemango/tirules">Github</a></p>
+</footer>
+</body>
+</html>

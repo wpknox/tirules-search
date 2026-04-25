@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="utf-8" http-equiv="encoding"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Wormhole Nexus - Twilight Imperium Rules</title>
+<link rel="icon" href="favicon.png"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script>
+(function () {
+    var hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    window.addEventListener('DOMContentLoaded', function () {
+        var article = document.querySelector('article');
+        if (!article) return;
+        var re = new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null, false);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        var first = null;
+        nodes.forEach(function (node) {
+            if (!node.nodeValue.trim()) return;
+            var m, last = 0, frag = document.createDocumentFragment();
+            re.lastIndex = 0;
+            while ((m = re.exec(node.nodeValue)) !== null) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+                var mark = document.createElement('mark');
+                mark.textContent = m[0];
+                if (!first) first = mark;
+                frag.appendChild(mark);
+                last = m.index + m[0].length;
+            }
+            if (last > 0) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            }
+        });
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+</head>
+<body>
+<nav class="search-bar">
+<form action="search.html">
+<input type="search" name="q" placeholder="Search rules&hellip;" id="search-input">
+<button type="submit">Search</button>
+</form>
+</nav>
+<header><h1>Wormhole Nexus</h1></header>
+<article>
+<h2>Rules Reference</h2>
+<style> .lrr > li:before, .lrr > h2 > li:before {content: '100.' counter(item, decimal);} </style>
+<p>The wormhole nexus is a system tile where several wormholes converge.</p>
+    <ol class="lrr">
+    <li>The wormhole nexus begins the game in play with its inactive side up.</li>
+    <ol>
+        <li>The inactive side of the wormhole nexus contains a gamma wormhole. The active side of the wormhole nexus contains an alpha, beta, and gamma wormhole.</li>
+        <li>The wormhole nexus is treated as part of the game board.</li>
+        <li>The wormhole nexus is on the edge of the game board.</li>
+    </ol>
+    <li>After a player moves or places a unit into the wormhole nexus, or gains control of the planet Mallice, that player flips the wormhole nexus to its active side.</li>
+    <ol><li>When a ship moves into the wormhole nexus, the nexus becomes active at the end of the <b>Movement</b> step.</li></ol>
+    </ol>
+
+<h2>Notes</h2>
+    <ol class="note">
+    <li>The wormhole nexus will flip if a unit exists in the system while inactive, even if that unit did not move through a gamma wormhole.</li>
+    <li>As the wormhole nexus becomes active at the end of the <b>Movement</b> step, only units with the <sc>Deep Space Cannon</sc> ability in systems containing a gamma wormhole will be able to produce hits during the <b>Space Cannon Offense</b> step during that action.</li>
+    <li>If the Creuss player moves their <i>Hil Colish</i> flagship into the inactive wormhole nexus, the wormhole nexus will not flip before they move any other ships. Any other ships they wish to move into the wormhole nexus must do so via either a delta wormhole or a gamma wormhole, unless the Creuss player is utilizing the ability of their agent, Emissary Taivra.</li>
+    <li>Any units and tokens on the inactive side are transferred to the active side when the wormhole nexus flips.</li>
+    <li>A ship in the wormhole will single&ndash;handedly qualify for the <i>Become the Gatekeeper</i> objective.</li>
+    </ol>
+
+<h2>Related Topics</h2>
+    <ul>
+    <li><a href="R_movement.html">Movement</a></li>
+    <li><a href="R_system_tiles.html">System Tiles</a></li>
+    <li><a href="R_wormholes.html">Wormholes</a></li>
+    </ul>
+</article>
+<footer>
+<p><a href="index.html" style="font-size:2em;">Home</a></p>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>Static mirror for offline use. All content and credit belong to
+<a href="https://github.com/dangothemango/tirules">dangothemango on GitHub</a>
+&mdash; original site at <a href="https://tirules2.com">tirules2.com</a>.</p>
+<p><span style="background-color: #fffacd; padding: 0.25em 0.5em; box-shadow: inset 4px 0 0 0 #ffa500; color: black;">Content highlighted in this color</span> reflects official rulings from Dane and are not part of the Living Rules Reference.</p>
+</footer>
+</body>
+</html>

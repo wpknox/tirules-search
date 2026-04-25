@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="utf-8" http-equiv="encoding"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Neutral Units - Twilight Imperium Rules</title>
+<link rel="icon" href="favicon.png"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script>
+(function () {
+    var hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    window.addEventListener('DOMContentLoaded', function () {
+        var article = document.querySelector('article');
+        if (!article) return;
+        var re = new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null, false);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        var first = null;
+        nodes.forEach(function (node) {
+            if (!node.nodeValue.trim()) return;
+            var m, last = 0, frag = document.createDocumentFragment();
+            re.lastIndex = 0;
+            while ((m = re.exec(node.nodeValue)) !== null) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+                var mark = document.createElement('mark');
+                mark.textContent = m[0];
+                if (!first) first = mark;
+                frag.appendChild(mark);
+                last = m.index + m[0].length;
+            }
+            if (last > 0) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            }
+        });
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+</head>
+<body>
+<nav class="search-bar">
+<form action="search.html">
+<input type="search" name="q" placeholder="Search rules&hellip;" id="search-input">
+<button type="submit">Search</button>
+</form>
+</nav>
+<header><h1>Neutral Units</h1></header>
+<article>
+<h2>Rules Reference</h2>
+<p>There currently does not exist a Living Rules Reference section regarding neutral units.</p>
+
+<h2>Notes</h2>
+    <ol class="note">
+    <li>Neutral units are placed in some system within The Fracture when it enters play. Several other game effects also place neutral units.</li>
+    <li>If a player has ships in a space area that contains neutral units, they will resolve a space combat against those units.</li>
+    <li>If a player has ground forces on a planet that contains neutral units, they will resolve a ground combat against those units.</li>
+    <li>Any player other than the active player may roll the combat and unit ability dice during a combat involving neutral units. The combat values and unit abilities are found on the neutral unit reference card.</li>
+    <li>Neutral units will always use each and every unit ability that they can.</li>
+    <li>Neutral units do not take turns, own technology, or draw action cards, and so on. They cannot retreat from combat.</li>
+    <li>When a hit is assigned against a group of neutral units, it is assigned to the unit that is lowest on the neutral unit reference card; generally, this corresponds to the unit with the lowest cost.</li>
+    <ol><li>Hits produced against neutral units may only be assigned to eligible unit types, as usual. For example, <sc>Anti&ndash;Fighter Barrage</sc> hits produced against neutral units may only be assigned to neutral fighters.</li></ol>
+    <li>Neutral units are considered to be another player&rsquo;s ships for abilities and other game effects. However, there is no neutral player.</li>
+    </ol>
+
+<h2>Related Topics</h2>
+    <ul>
+    <li><a href="R_fracture.html">The Fracture</a></li>
+    <li><a href="R_ground_combat.html">Ground Combat</a></li>
+    <li><a href="R_space_combat.html">Space Combat</a></li>
+    </ul>
+</article>
+<footer>
+<p><a href="index.html" style="font-size:2em;">Home</a></p>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>Static mirror for offline use. All content and credit belong to
+<a href="https://github.com/dangothemango/tirules">dangothemango on GitHub</a>
+&mdash; original site at <a href="https://tirules2.com">tirules2.com</a>.</p>
+<p><span style="background-color: #fffacd; padding: 0.25em 0.5em; box-shadow: inset 4px 0 0 0 #ffa500; color: black;">Content highlighted in this color</span> reflects official rulings from Dane and are not part of the Living Rules Reference.</p>
+</footer>
+</body>
+</html>

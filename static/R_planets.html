@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="utf-8" http-equiv="encoding"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Planets - Twilight Imperium Rules</title>
+<link rel="icon" href="favicon.png"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script>
+(function () {
+    var hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    window.addEventListener('DOMContentLoaded', function () {
+        var article = document.querySelector('article');
+        if (!article) return;
+        var re = new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null, false);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        var first = null;
+        nodes.forEach(function (node) {
+            if (!node.nodeValue.trim()) return;
+            var m, last = 0, frag = document.createDocumentFragment();
+            re.lastIndex = 0;
+            while ((m = re.exec(node.nodeValue)) !== null) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+                var mark = document.createElement('mark');
+                mark.textContent = m[0];
+                if (!first) first = mark;
+                frag.appendChild(mark);
+                last = m.index + m[0].length;
+            }
+            if (last > 0) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            }
+        });
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+</head>
+<body>
+<nav class="search-bar">
+<form action="search.html">
+<input type="search" name="q" placeholder="Search rules&hellip;" id="search-input">
+<button type="submit">Search</button>
+</form>
+</nav>
+<header><h1>Planets</h1></header>
+<article>
+<h2>Rules Reference</h2>
+<style> .lrr > li:before, .lrr > h2 > li:before {content: '64.' counter(item, decimal);} </style>
+<p>Planets provide players with resources and influence. Planets are on system tiles and each has a name, a resource value, and an influence value. Some planets also have traits.</p>
+    <ol class="lrr">
+    <li>A planet&rsquo;s resources are indicated by the value on its planet card and system tile that is surrounded by a yellow triangular border.</li>
+    <li>A planet&rsquo;s influence is indicated by the value on its planet card and system tile that is surrounded by a blue hexagonal border.</li>
+    <li>A planet&rsquo;s trait has no inherent effects, but some game effects refer to a planet&rsquo;s trait. There are three traits: cultural, hazardous, and industrial.</li>
+    <li>Some planets have a technology specialty, which allows those planets to be exhausted to satisfy a prerequisite when researching technology.</li>
+    <li>Some planets are legendary planets, as indicated by the legendary planet icon. When a player gains control of a legendary planet, they also gain control of its legendary planet ability card.</li>
+    <h2><li>Planet Card</li></h2>
+    <p>Each planet has a corresponding planet card that displays its name, resource value, influence value, and trait, if it has one. If a player controls a planet, they keep that planet&rsquo;s card in their play area.</p>
+    <li>A planet card has both a readied and exhausted state. When a planet is readied, it is placed faceup. When a planet is exhausted, it is placed facedown.</li>
+    <li>A player can spend a readied planet&rsquo;s resources or influence.</li>
+    <li>A player cannot spend an exhausted planet&rsquo;s resources or influence.</li>
+    </ol>
+
+<h2>Notes</h2>
+    <ol class="note">
+    <li>Mecatol Rex and planets in home systems do not have traits.</li>
+    <li>Planets with traits can be explored.</li>
+    <li>A planet cannot be spent for both its influence and resources during a single exhaustion.</li>
+    <li>If a planet is exhausted for its technology specialty, it does not provide influence or resources.</li>
+    <li>A player may only exhaust their own planets, unless a game effect specifies otherwise.</li>
+    </ol>
+
+<h2>Related Topics</h2>
+    <ul>
+    <li><a href="R_control.html">Control</a></li>
+    <li><a href="R_exploration.html">Exploration</a></li>
+    <li><a href="R_exhausted.html">Exhausted</a></li>
+    <li><a href="R_influence.html">Influence</a></li>
+    <li><a href="R_invasion.html">Invasion</a></li>
+    <li><a href="R_legendary_planets.html">Legendary Planets</a></li>
+    <li><a href="R_mecatol_rex.html">Mecatol Rex</a></li>
+    <li><a href="R_readied.html">Readied</a></li>
+    <li><a href="R_resources.html">Resources</a></li>
+    <li><a href="R_system_tiles.html">System Tiles</a></li>
+    <li><a href="R_technology.html">Technology</a></li>
+    </ul>
+</article>
+<footer>
+<p><a href="index.html" style="font-size:2em;">Home</a></p>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>Static mirror for offline use. All content and credit belong to
+<a href="https://github.com/dangothemango/tirules">dangothemango on GitHub</a>
+&mdash; original site at <a href="https://tirules2.com">tirules2.com</a>.</p>
+<p><span style="background-color: #fffacd; padding: 0.25em 0.5em; box-shadow: inset 4px 0 0 0 #ffa500; color: black;">Content highlighted in this color</span> reflects official rulings from Dane and are not part of the Living Rules Reference.</p>
+</footer>
+</body>
+</html>

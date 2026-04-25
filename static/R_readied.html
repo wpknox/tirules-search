@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="utf-8" http-equiv="encoding"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Readied - Twilight Imperium Rules</title>
+<link rel="icon" href="favicon.png"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script>
+(function () {
+    var hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    window.addEventListener('DOMContentLoaded', function () {
+        var article = document.querySelector('article');
+        if (!article) return;
+        var re = new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null, false);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        var first = null;
+        nodes.forEach(function (node) {
+            if (!node.nodeValue.trim()) return;
+            var m, last = 0, frag = document.createDocumentFragment();
+            re.lastIndex = 0;
+            while ((m = re.exec(node.nodeValue)) !== null) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+                var mark = document.createElement('mark');
+                mark.textContent = m[0];
+                if (!first) first = mark;
+                frag.appendChild(mark);
+                last = m.index + m[0].length;
+            }
+            if (last > 0) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            }
+        });
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+</head>
+<body>
+<nav class="search-bar">
+<form action="search.html">
+<input type="search" name="q" placeholder="Search rules&hellip;" id="search-input">
+<button type="submit">Search</button>
+</form>
+</nav>
+<header><h1>Readied</h1></header>
+<article>
+<h2>Rules Reference</h2>
+<style> .lrr > li:before, .lrr > h2 > li:before {content: '71.' counter(item, decimal);} </style>
+<p>Cards have a readied state, which indicates that a player can exhaust or resolve the abilities on those cards.</p>
+    <ol class="lrr">
+    <li>A card that is readied is placed faceup in a player&rsquo;s play area; a card that is exhausted is placed facedown in a player&rsquo;s area.</li>
+    <li>A player can exhaust a readied planet card to spend resources or influence from that card&rsquo;s planet.</li>
+    <li>A player can exhaust certain readied technology cards to resolve those cards&rsquo; abilities.</li>
+    <ol><li>Such a technology will specifically instruct a player to exhaust the card as part of the ability&rsquo;s cost.</li></ol>
+    <li>If a card is exhausted, a player cannot resolve that card&rsquo;s abilities or spend resources or influence on that card until it is readied.</li>
+    <li>During a <b>Ready Cards</b> step, each player readies all of their exhausted cards by flipping them faceup.</li>
+    <li>When a player performs a strategic action, they exhaust their chosen strategy card.</li>
+    <ol><li>That card is later readied during the status phase.</li></ol>
+    </ol>
+
+<h2>Notes</h2>
+    <ol class="note">
+    <li>Passive abilities on an exhausted card are still in effect while that card is exhausted.</li>
+    <li>Planets will also ready at the end of each agenda phase. Leaders, relics and technologies will not.</li>
+    <li>If a game effect instructs a player to ready a planet, the readied planet must be controlled by that player, unless the game effect specifies otherwise.</li>
+    </ol>
+
+<h2>Related Topics</h2>
+    <ul>
+    <li><a href="R_abilities.html">Abilities</a></li>
+    <li><a href="R_diplomacy.html">Diplomacy</a></li>
+    <li><a href="R_exhausted.html">Exhausted</a></li>
+    <li><a href="R_leaders.html">Leaders</a></li>
+    <li><a href="R_planets.html">Planets</a></li>
+    <li><a href="R_relics.html">Relics</a></li>
+    <li><a href="R_status_phase.html">Status Phase</a></li>
+    <li><a href="R_technology.html">Technology</a></li>
+    </ul>
+</article>
+<footer>
+<p><a href="index.html" style="font-size:2em;">Home</a></p>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>Static mirror for offline use. All content and credit belong to
+<a href="https://github.com/dangothemango/tirules">dangothemango on GitHub</a>
+&mdash; original site at <a href="https://tirules2.com">tirules2.com</a>.</p>
+<p><span style="background-color: #fffacd; padding: 0.25em 0.5em; box-shadow: inset 4px 0 0 0 #ffa500; color: black;">Content highlighted in this color</span> reflects official rulings from Dane and are not part of the Living Rules Reference.</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="utf-8" http-equiv="encoding"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Deploy - Twilight Imperium Rules</title>
+<link rel="icon" href="favicon.png"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script>
+(function () {
+    var hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    window.addEventListener('DOMContentLoaded', function () {
+        var article = document.querySelector('article');
+        if (!article) return;
+        var re = new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null, false);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        var first = null;
+        nodes.forEach(function (node) {
+            if (!node.nodeValue.trim()) return;
+            var m, last = 0, frag = document.createDocumentFragment();
+            re.lastIndex = 0;
+            while ((m = re.exec(node.nodeValue)) !== null) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+                var mark = document.createElement('mark');
+                mark.textContent = m[0];
+                if (!first) first = mark;
+                frag.appendChild(mark);
+                last = m.index + m[0].length;
+            }
+            if (last > 0) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            }
+        });
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+</head>
+<body>
+<nav class="search-bar">
+<form action="search.html">
+<input type="search" name="q" placeholder="Search rules&hellip;" id="search-input">
+<button type="submit">Search</button>
+</form>
+</nav>
+<header><h1>Deploy</h1></header>
+<article>
+<h2>Rules Reference</h2>
+<style> .lrr > li:before, .lrr > h2 > li:before {content: '30.' counter(item, decimal);} </style>
+<p>Some units have deploy abilities. Deploy abilities are indicated by the <sc>Deploy</sc> header and provide the means to place specific units on the game board without producing them as normal.</p>
+    <ol class="lrr">
+    <li>A player can use a unit&rsquo;s <sc>Deploy</sc> ability when the ability&rsquo;s conditions are met to place that unit on the game board.</li>
+    <ol><li>A player does not have to spend resources to deploy a unit unless otherwise specified.</li></ol>
+    <li>A player can only resolve a <sc>Deploy</sc> ability to place a unit that is in their reinforcements.</li>
+    <ol><li>If there are no units that have a <sc>Deploy</sc> ability in a player&rsquo;s reinforcements, the <sc>Deploy</sc> ability cannot be used.</li></ol>
+    <li>A unit&rsquo;s <sc>Deploy</sc> ability can be resolved only once per timing window.</li>
+    </ol>
+
+<h2>Notes</h2>
+    <ol class="note">
+    </ol>
+
+<h2>Related Topics</h2>
+    <ul>
+    <li><a href="R_abilities.html">Abilities</a></li>
+    <li><a href="R_mechs.html">Mechs</a></li>
+    <li><a href="R_reinforcements.html">Reinforcements</a></li>
+    </ul>
+</article>
+<footer>
+<p><a href="index.html" style="font-size:2em;">Home</a></p>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>Static mirror for offline use. All content and credit belong to
+<a href="https://github.com/dangothemango/tirules">dangothemango on GitHub</a>
+&mdash; original site at <a href="https://tirules2.com">tirules2.com</a>.</p>
+<p><span style="background-color: #fffacd; padding: 0.25em 0.5em; box-shadow: inset 4px 0 0 0 #ffa500; color: black;">Content highlighted in this color</span> reflects official rulings from Dane and are not part of the Living Rules Reference.</p>
+</footer>
+</body>
+</html>

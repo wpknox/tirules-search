@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+<meta content="utf-8" http-equiv="encoding"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Exploration - Twilight Imperium Rules</title>
+<link rel="icon" href="favicon.png"/>
+<link rel="stylesheet" type="text/css" href="style.css"/>
+<script>
+(function () {
+    var hl = new URLSearchParams(window.location.search).get('hl');
+    if (!hl) return;
+    window.addEventListener('DOMContentLoaded', function () {
+        var article = document.querySelector('article');
+        if (!article) return;
+        var re = new RegExp(hl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi');
+        var walker = document.createTreeWalker(article, NodeFilter.SHOW_TEXT, null, false);
+        var nodes = [];
+        while (walker.nextNode()) nodes.push(walker.currentNode);
+        var first = null;
+        nodes.forEach(function (node) {
+            if (!node.nodeValue.trim()) return;
+            var m, last = 0, frag = document.createDocumentFragment();
+            re.lastIndex = 0;
+            while ((m = re.exec(node.nodeValue)) !== null) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last, m.index)));
+                var mark = document.createElement('mark');
+                mark.textContent = m[0];
+                if (!first) first = mark;
+                frag.appendChild(mark);
+                last = m.index + m[0].length;
+            }
+            if (last > 0) {
+                frag.appendChild(document.createTextNode(node.nodeValue.slice(last)));
+                node.parentNode.replaceChild(frag, node);
+            }
+        });
+        if (first) first.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+})();
+</script>
+</head>
+<body>
+<nav class="search-bar">
+<form action="search.html">
+<input type="search" name="q" placeholder="Search rules&hellip;" id="search-input">
+<button type="submit">Search</button>
+</form>
+</nav>
+<header><h1>Exploration</h1></header>
+<article>
+<h2>Rules Reference</h2>
+<style> .lrr > li:before, .lrr > h2 > li:before {content: '35.' counter(item, decimal);} </style>
+<p>Planets and some space areas can be explored, yielding varying results determined by the cards drawn from the exploration decks.</p>
+    <ol class="lrr">
+    <li>When a player takes control of a planet that is not already controlled by another player, they explore that planet.</li>
+    <li>When a player explores a planet, they draw and resolve a card from the exploration deck that corresponds to that planet&rsquo;s trait.</li>
+    <ol>
+        <li>There are three planetary exploration decks, each of which corresponds to a planet trait: cultural, hazardous, and industrial.</li>
+        <li>Planets that do not have traits, such as Mecatol Rex and planets in home systems, cannot be explored.</li>
+        <li>If a planet has multiple traits, the player exploring the planet chooses which of the corresponding exploration decks to draw from.</li>
+        <li>If a player gains control of multiple planets or resolves multiple explore effects at the same time, they choose the order in which they resolve those explorations, completely resolving each exploration card before resolving the next.</li>
+    </ol>
+    <li>Certain abilities may allow a planet to be explored multiple times.</li>
+    <li>Players can explore space areas that contain frontier tokens if they own the <i>Dark Energy Tap</i> technology or if another game effect allows them to.</li>
+    <ol><li>Frontier tokens are placed in systems during setup and by specific abilities.</li></ol>
+    <li>When a player explores a frontier token, they draw and resolve a card from the frontier exploration deck.</li>
+    <li>After a frontier token is explored, it is discarded and returned to the supply.</li>
+    <li>To resolve an exploration card, a player reads the card, makes any necessary decisions, and resolves its ability. If the card was not a relic fragment or an attachment, it is discarded into its respective discard pile.</li>
+    <ol><li>If there are no cards in an exploration deck, its discard pile is shuffled to form a new exploration deck.</li></ol>
+    <li>If a player resolves an exploration card that has an &ldquo;attach&rdquo; header, they attach that card to the planet card of the planet being explored.</li>
+    <li>If a player resolves an exploration card that has &ldquo;relic fragment&rdquo; in the title, they place that card faceup in their play area.</li>
+    <ol>
+        <li>Players can resolve the ability of relic fragments that are in their play area. Resolving these abilities allows players to draw cards from the relic deck.</li>
+        <li>Relic fragments can be exchanged as part of transactions.</li>
+    </ol>
+    </ol>
+
+<h2>Notes</h2>
+    <ol class="note">
+    <li>An exploration cards that purges itself is not discarded into its respective discard pile.</li>
+    <li><i>Enigmatic Device</i> and <i>Ion Storm</i> are placed into play, not into the frontier discard pile.</li>
+    <li>If a player is to gain multiple planets in a system, they choose the order in which they gain them, and explore each planet as they gain it before gaining the next.</li>
+    <li>A player may perform transactions after revealing an exploration card and before resolving it.</li>
+    <li>Before resolving an exploration card, it is revealed to all players.</li>
+    <li>For notes about specific exploration cards, see the <a href="C_exploration_cards.html">exploration cards notes page</a>.</li>
+    </ol>
+
+<h2>Related Topics</h2>
+    <ul>
+    <li><a href="R_attach.html">Attach</a></li>
+    <li><a href="R_control.html">Control</a></li>
+    <li><a href="R_frontier_tokens.html">Frontier Tokens</a></li>
+    <li><a href="R_invasion.html">Invasion</a></li>
+    <li><a href="R_planets.html">Planets</a></li>
+    <li><a href="R_purge">Purge</a></li>
+    <li><a href="R_relics.html">Relics</a></li>
+    <li><a href="R_transactions.html">Transactions</a></li>
+    </ul>
+</article>
+<footer>
+<p><a href="index.html" style="font-size:2em;">Home</a></p>
+<p><i>Twilight Imperium</i> &copy; Fantasy Flight Games. Not Affiliated.</p>
+<p>Static mirror for offline use. All content and credit belong to
+<a href="https://github.com/dangothemango/tirules">dangothemango on GitHub</a>
+&mdash; original site at <a href="https://tirules2.com">tirules2.com</a>.</p>
+<p><span style="background-color: #fffacd; padding: 0.25em 0.5em; box-shadow: inset 4px 0 0 0 #ffa500; color: black;">Content highlighted in this color</span> reflects official rulings from Dane and are not part of the Living Rules Reference.</p>
+</footer>
+</body>
+</html>
