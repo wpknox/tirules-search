@@ -240,7 +240,7 @@ header, footer
     background-image: url("beta.png");
     background-repeat: repeat;
     background-attachment: fixed;
-    background-position: 81% 42%;
+    background-position: 74% 39%;
     background-size: calc(1196px * 0.05) calc(480px * 0.05);
 }
 .search-bar

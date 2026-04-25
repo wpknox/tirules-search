@@ -1,9 +1,9 @@
 <?php
-// Generates a static HTML copy of the site in ./static/
+// Generates a static HTML copy of the site in ./docs/
 // Usage: php build.php
 
 define('SRC', __DIR__);
-define('OUT', __DIR__ . '/static');
+define('OUT', __DIR__ . '/docs');
 
 if (!is_dir(OUT)) mkdir(OUT, 0755, true);
 
@@ -251,3 +251,4 @@ SCRIPT;
 file_put_contents(OUT . '/search.html', $search_html);
 echo "Built: search.html\n";
 echo "\nDone! Open " . OUT . "/index.html in any browser.\n";
+echo "To publish: commit the docs/ folder and push. GitHub Pages will update automatically.\n";
